@@ -1,0 +1,11 @@
+# Разрешаем всем поисковым роботам сканировать сайт
+User-agent: *
+Allow: /
+
+# Запрещаем сканировать служебные пути (на всякий случай)
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /tmp/
+
+# Указываем путь к карте сайта (это важно для индексации)
+Sitemap: https://balkonchik-minsk.by/sitemap.xml

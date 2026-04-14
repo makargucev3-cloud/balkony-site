@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Главная страница -->
+  <url>
+    <loc>https://balkonchik-minsk.by/</loc>
+    <lastmod>2024-03-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- Страница "Отделка балкона" -->
+  <url>
+    <loc>https://balkonchik-minsk.by/otdelka-balkona</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Страница "Остекление балкона" -->
+  <url>
+    <loc>https://balkonchik-minsk.by/osteklenie-balkona</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Страница "Окна" -->
+  <url>
+    <loc>https://balkonchik-minsk.by/okna</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>
