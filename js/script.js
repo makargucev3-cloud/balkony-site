@@ -263,3 +263,43 @@ function setupPhoneMask() {
 
 // Запускаем маску телефона
 document.addEventListener('DOMContentLoaded', setupPhoneMask);
+
+// ========== ТАЙМЕР АКЦИИ ДО КОНЦА ДНЯ ==========
+function updateTimer() {
+    const now = new Date();
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999);
+    
+    const diff = endOfDay - now;
+    
+    if (diff <= 0) {
+        // Если время вышло, показываем 00:00:00
+        document.getElementById('timerHours').textContent = '00';
+        document.getElementById('timerMinutes').textContent = '00';
+        document.getElementById('timerSeconds').textContent = '00';
+        return;
+    }
+    
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (3600000)) / (1000 * 60));
+    const seconds = Math.floor((diff % (60000)) / 1000);
+    
+    document.getElementById('timerHours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('timerMinutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('timerSeconds').textContent = String(seconds).padStart(2, '0');
+}
+
+// Запускаем таймер
+setInterval(updateTimer, 1000);
+updateTimer();
+
+// Обновление даты (оставляем как было)
+function updatePromoDate() {
+    const dateElement = document.getElementById('promoDate');
+    if (dateElement) {
+        const today = new Date();
+        const options = { day: 'numeric', month: 'long' };
+        dateElement.textContent = today.toLocaleDateString('ru-RU', options);
+    }
+}
+document.addEventListener('DOMContentLoaded', updatePromoDate);
