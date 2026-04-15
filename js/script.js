@@ -267,6 +267,16 @@ document.addEventListener('DOMContentLoaded', setupPhoneMask);
 
 // ========== ТАЙМЕР АКЦИИ ДО КОНЦА ДНЯ ==========
 function updateTimer() {
+    // Проверяем, существуют ли элементы таймера на странице
+    const hoursElem = document.getElementById('timerHours');
+    const minutesElem = document.getElementById('timerMinutes');
+    const secondsElem = document.getElementById('timerSeconds');
+    
+    // Если хотя бы одного элемента нет — выходим (таймер не нужен на этой странице)
+    if (!hoursElem || !minutesElem || !secondsElem) {
+        return;
+    }
+    
     const now = new Date();
     const endOfDay = new Date();
     endOfDay.setHours(23, 59, 59, 999);
@@ -274,10 +284,9 @@ function updateTimer() {
     const diff = endOfDay - now;
     
     if (diff <= 0) {
-        // Если время вышло, показываем 00:00:00
-        document.getElementById('timerHours').textContent = '00';
-        document.getElementById('timerMinutes').textContent = '00';
-        document.getElementById('timerSeconds').textContent = '00';
+        hoursElem.textContent = '00';
+        minutesElem.textContent = '00';
+        secondsElem.textContent = '00';
         return;
     }
     
@@ -285,14 +294,16 @@ function updateTimer() {
     const minutes = Math.floor((diff % (3600000)) / (1000 * 60));
     const seconds = Math.floor((diff % (60000)) / 1000);
     
-    document.getElementById('timerHours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('timerMinutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('timerSeconds').textContent = String(seconds).padStart(2, '0');
+    hoursElem.textContent = String(hours).padStart(2, '0');
+    minutesElem.textContent = String(minutes).padStart(2, '0');
+    secondsElem.textContent = String(seconds).padStart(2, '0');
 }
 
-// Запускаем таймер
-setInterval(updateTimer, 1000);
-updateTimer();
+// Запускаем таймер только если есть элементы на странице
+if (document.getElementById('timerHours')) {
+    setInterval(updateTimer, 1000);
+    updateTimer();
+}
 
 // Обновление даты (оставляем как было)
 function updatePromoDate() {
