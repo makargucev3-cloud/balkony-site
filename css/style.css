@@ -100,24 +100,28 @@ body {
     max-width: 100%;
 }
 
-/* ========== ТЕЛЕФОНЫ (ДЕСКТОП - 2 СТОЛБЦА) ========== */
+/* Телефоны */
 .header__phones {
+    text-align: right;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 15px;
+    flex-direction: row; /* Телефоны в колонку, кнопка справа */
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-right: 0;
 }
 
-.header__phones-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px 25px;
+.header__phones-wrapper {
+    display: flex;
+    flex-direction: column; /* Номера друг под другом */
+    gap: 5px;
 }
 
 .header__phone {
+    display: block; /* Блочный элемент, чтобы быть друг под другом */
     color: var(--color-text);
     text-decoration: none;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     transition: color 0.3s ease;
     white-space: nowrap;
@@ -132,11 +136,12 @@ body {
     background: none;
     border: none;
     color: var(--color-primary);
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     cursor: pointer;
     text-decoration: underline;
     padding: 5px 0;
+    margin-left: 0;
     white-space: nowrap;
 }
 
@@ -144,42 +149,49 @@ body {
     color: var(--color-primary-dark);
 }
 
-/* ========== ПЛАНШЕТЫ ========== */
-@media (min-width: 768px) and (max-width: 991px) {
-    .header__phones-grid {
-        gap: 8px 15px;
-    }
-    
-    .header__phone {
-        font-size: 14px;
-    }
-    
-    .header__callback {
-        font-size: 14px;
-    }
+/* Нижняя часть шапки с меню */
+.header__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
 }
 
 /* ========== МОБИЛЬНЫЕ УСТРОЙСТВА ========== */
 @media (max-width: 767px) {
-    .header__phones {
-        align-items: center;
-        width: 100%;
+    .header__top {
+        flex-direction: column;
+        gap: 15px;
     }
     
-    .header__phones-grid {
-        grid-template-columns: 1fr;
-        gap: 8px;
-        width: 100%;
+    .header__logo {
+        gap: 10px;
+    }
+    
+    .header__logo-img {
+        width: 40px;
+    }
+    
+    .header__logo-okno {
+        font-size: 28px;
+    }
+    
+    .header__logo-text {
+        font-size: 12px;
+    }
+    
+    .header__phones {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
     }
     
     .header__phone {
-        text-align: center;
         font-size: 16px;
     }
     
     .header__callback {
-        text-align: center;
-        width: auto;
+        font-size: 14px;
     }
 }
 
