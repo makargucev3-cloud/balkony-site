@@ -303,3 +303,28 @@ function updatePromoDate() {
     }
 }
 document.addEventListener('DOMContentLoaded', updatePromoDate);
+
+// ========== СКРЫТИЕ ШАПКИ ПРИ СКРОЛЛЕ ВНИЗ ==========
+let lastScrollTop = 0;
+const header = document.querySelector('.header');
+const SCROLL_THRESHOLD = 50; // Через сколько пикселей скрывать
+
+window.addEventListener('scroll', function() {
+    let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Проверяем направление скролла
+    if (currentScroll > lastScrollTop && currentScroll > SCROLL_THRESHOLD) {
+        // Скролл ВНИЗ - скрываем шапку
+        header.classList.add('header--hidden');
+    } else if (currentScroll < lastScrollTop) {
+        // Скролл ВВЕРХ - показываем шапку
+        header.classList.remove('header--hidden');
+    }
+    
+    // Если мы в самом верху страницы, показываем шапку
+    if (currentScroll <= 10) {
+        header.classList.remove('header--hidden');
+    }
+    
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+});
