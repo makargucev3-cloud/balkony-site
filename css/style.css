@@ -2913,3 +2913,17 @@ html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px; /* Отступ сверху, чтобы шапка не перекрывала заголовок */
 }
+
+.hero__features {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero__feature {
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
