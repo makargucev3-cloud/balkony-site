@@ -80,10 +80,61 @@ function updatePromoDate() {
     }
 }
 
+// ========== БУРГЕР-МЕНЮ (МОБИЛЬНАЯ ВЕРСИЯ) ==========
+function initBurgerMenu() {
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav');
+    
+    if (burger && nav) {
+        console.log('✅ Бургер-меню найдено');
+        
+        burger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            burger.classList.toggle('active');
+            nav.classList.toggle('active');
+            
+            // Блокируем/разблокируем прокрутку страницы
+            if (nav.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Закрываем меню при клике на ссылку
+        const navLinks = document.querySelectorAll('.nav__link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                burger.classList.remove('active');
+                nav.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Закрываем меню при клике вне его
+        document.addEventListener('click', function(e) {
+            if (nav.classList.contains('active') && 
+                !nav.contains(e.target) && 
+                !burger.contains(e.target)) {
+                burger.classList.remove('active');
+                nav.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    } else {
+        console.error('❌ Бургер-меню не найдено! Проверьте ID burger и nav');
+    }
+}
+
 // ========== ОТПРАВКА ФОРМ ==========
 document.addEventListener('DOMContentLoaded', function() {
     // Автообновление даты
     updatePromoDate();
+    
+    // Инициализация бургер-меню
+    initBurgerMenu();
     
     // Форматирование телефонов
     document.querySelectorAll('input[type="tel"]').forEach(input => {
@@ -140,7 +191,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (result.success) {
                     alert('✅ Заявка отправлена! Мы свяжемся с вами.');
                     this.reset();
-                    closeModal();
+                    
+                    // ПРИНУДИТЕЛЬНОЕ ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА
+                    if (modal) modal.classList.remove('active');
+                    if (modalOverlay) modalOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    
                 } else {
                     alert('❌ Ошибка: ' + result.message);
                 }
@@ -205,18 +261,5 @@ function setupPhoneMask() {
     });
 }
 
-// Запускаем при загрузке страницы
+// Запускаем маску телефона
 document.addEventListener('DOMContentLoaded', setupPhoneMask);
-
-// Дополнительная принудительная привязка для закрытия модалки
-document.addEventListener('DOMContentLoaded', function() {
-    const modalForm = document.querySelector('#modal .ajax-form');
-    if (modalForm) {
-        const originalSubmit = modalForm.onsubmit;
-        modalForm.addEventListener('submit', function() {
-            setTimeout(() => {
-                closeModal();
-            }, 100);
-        });
-    }
-});
