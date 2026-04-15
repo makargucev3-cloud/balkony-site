@@ -2989,3 +2989,15 @@ html {
         font-size: 11px;
     }
 }
+
+/* ========== СКРЫТИЕ ШАПКИ ПРИ СКРОЛЛЕ ========== */
+.header {
+    transition: transform 0.3s ease-in-out;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header--hidden {
+    transform: translateY(-100%);
+}
